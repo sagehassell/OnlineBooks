@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Welcome to Online Books";
+}
+
+@model IQueryable<Book>
+<br />
+<br />
+<div class="card-subtitle">
+    <h2>Here are the Top Picks</h2>
+</div>
+<br /><br />
+<div>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Classification</th>
+        </tr>
+        @foreach(var x in Model)
+        {
+    <tr>
+        <td>@x.Title</td>
+        <td>@x.AuthorFirstName @x.AuthorMiddleInitial @x.AuthorLastName</td>
+        <td>@x.Publisher</td>
+        <td>@x.ISBN</td>
+        <td>@x.Price</td>
+        <td>@x.Category</td>
+        <td>@x.Classification</td>
+    </tr>
+        }
+
+    </table>
+</div>
