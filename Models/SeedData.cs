@@ -31,7 +31,7 @@ namespace OnlineBooks.Models
                         AuthorFirstName = "Laura",
                         AuthorLastName = "Hillenbrand",
                         Publisher = "Random House",
-                        ISBN = 978-3-642-11746-6,
+                        ISBN = "978-3642117466",
                         Price = 13.33f,
                         Category = "Non-Fiction",
                         Classification = "Historical"
@@ -43,7 +43,7 @@ namespace OnlineBooks.Models
                         AuthorFirstName = "Victor",
                         AuthorLastName = "Hugo",
                         Publisher = "Signet",
-                        ISBN = 978-0-451-41943-9,
+                        ISBN = "978-0451419439",
                         Price = 9.95f,
                         Category = "Non-Fiction",
                         Classification = "Historical"
@@ -55,7 +55,7 @@ namespace OnlineBooks.Models
                         AuthorFirstName = "Cal",
                         AuthorLastName = "Newport",
                         Publisher = "Grand Central Publishing",
-                        ISBN = 978-1-455-52302-3,
+                        ISBN = "978-1455523023",
                         Price = 14.99f,
                         Category = "Non-Fiction",
                         Classification = "Self-Help"

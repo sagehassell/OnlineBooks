@@ -23,9 +23,9 @@ namespace OnlineBooks.Models
 
         //check the ISBN format is valid
         [Required]
-        [RegularExpression(@"ISBN(-1(?:(0)|3))?:?\x20(\s)*[0-9]+[- ][0-9]+[- ][0-9]+[- ][0-9]*[- ]*[xX0-9]",
+        [RegularExpression(@"^\d{3}-\d{10}$",
                    ErrorMessage = "Entered ISBN format is not valid.")]
-        public int ISBN { get; set; }
+        public string ISBN { get; set; }
         [Required]
         public float Price { get; set; }
         //create atomic catigories 
