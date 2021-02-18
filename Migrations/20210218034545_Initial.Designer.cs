@@ -9,7 +9,7 @@ using OnlineBooks.Models;
 namespace OnlineBooks.Migrations
 {
     [DbContext(typeof(BooksDBContext))]
-    [Migration("20210218032055_Initial")]
+    [Migration("20210218034545_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
