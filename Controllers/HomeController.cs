@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using OnlineBooks.Models.ViewModels;
 
 namespace OnlineBooks.Controllers
 {
@@ -14,6 +15,8 @@ namespace OnlineBooks.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private IBooksRepository _repository;
+        //specify how many you want per page
+        public int PageSize = 5;
 
         public HomeController(ILogger<HomeController> logger, IBooksRepository repository)
         {
@@ -21,10 +24,24 @@ namespace OnlineBooks.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             //pass in the Book objects
-            return View(_repository.Books);
+            return View(new BookListViewModel
+            {
+                Books = _repository.Books
+                    //querey writen out in the language link
+                    .OrderBy(p => p.BookId)
+                    .Skip((page -1) * PageSize)
+                    .Take(PageSize)
+                    ,
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        ItemsPerPage = PageSize,
+                        TotalNumItems = _repository.Books.Count()
+                    }
+            });                    
         }
 
         public IActionResult Privacy()

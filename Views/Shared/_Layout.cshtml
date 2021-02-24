@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <center>
-        <div class="card-header">
-            <br />
-            <h1>@ViewBag.Title</h1>
-            <br />
+    
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
+                <h1 class="navbar-brand"><span class="h1">@ViewBag.Title</span> </h1>
+            </nav>
         </div>
         <div>
             @RenderBody()
         </div>
-    </center>
+    
 </body>
 </html>

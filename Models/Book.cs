@@ -19,6 +19,8 @@ namespace OnlineBooks.Models
         [Required]
         public string  AuthorLastName { get; set; }
         [Required]
+        public int PageNumber { get; set; }
+        [Required]
         public string Publisher { get; set; }
 
         //check the ISBN format is valid
