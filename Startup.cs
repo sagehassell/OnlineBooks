@@ -26,13 +26,17 @@ namespace OnlineBooks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //let us set up the MVC system
             services.AddControllersWithViews();
-            //add services
+
+            //add a DB context services
             services.AddDbContext<BooksDBContext>(options =>
            {
+               //set the connection string to the one I just made
                options.UseSqlServer(Configuration["ConnectionStrings:BooksConnection"]);
            });
-            //add scoped
+            
+            //add scoped - so each person gets their own mini version of the DB
             services.AddScoped<IBooksRepository, EFBooksRepository>();
         }
 
@@ -58,6 +62,20 @@ namespace OnlineBooks
 
             app.UseEndpoints(endpoints =>
             {
+                //build endpoint for classification - the structre for how people access things on our site
+                endpoints.MapControllerRoute("classpage",
+                    "{category}/{page:int}",
+                    new { Controller = "home", action = "index" }
+                    );
+
+                endpoints.MapControllerRoute("page",
+                    "P{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", page=1 });
+
                 endpoints.MapControllerRoute(
                     "pagination",
                     "P{page}",
@@ -66,6 +84,7 @@ namespace OnlineBooks
                 endpoints.MapDefaultControllerRoute();
             });
 
+            //This will call the EnsurePopulated method in Seed Data and tell us if it has already been migrated
             SeedData.EnsurePopulated(app);
         }
     }

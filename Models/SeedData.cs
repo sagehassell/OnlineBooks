@@ -12,14 +12,14 @@ namespace OnlineBooks.Models
     {
         public static void EnsurePopulated (IApplicationBuilder application)
         {
+            //make sure it was populated okay
             BooksDBContext context = application.ApplicationServices.
                 CreateScope().ServiceProvider.GetRequiredService<BooksDBContext>();
         
             //check to see if there are any pending migrations
             if(context.Database.GetPendingMigrations().Any())
             {
-                //Migrate those 
-                
+                //Migrate those  
                 context.Database.Migrate();
             }
             //if there aren't any books, fill it with this

@@ -8,15 +8,21 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
-                <h1 class="navbar-brand"><span class="h1">@ViewBag.Title</span> </h1>
-            </nav>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+            <h1 class="navbar-brand"><span class="h1">@ViewBag.Title</span> </h1>
+        </nav>
+    </div>
+
+    <div class="row m-1 p-1">
+        <div class="col-3">
+            <vc:navigation-menu></vc:navigation-menu>
         </div>
-        <div>
+
+        <div class="col-9">
             @RenderBody()
         </div>
-    
+    </div>
 </body>
 </html>

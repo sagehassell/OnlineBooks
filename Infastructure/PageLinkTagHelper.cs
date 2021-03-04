@@ -31,8 +31,9 @@ namespace OnlineBooks.Infastructure
         public ViewContext ViewContext { get; set; }
         public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
-        
-        //styling properties
+
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
@@ -53,6 +54,11 @@ namespace OnlineBooks.Infastructure
                 //build a tag 
                 TagBuilder linkTag = new TagBuilder("a");
 
+                PageUrlValues["page"] = i;
+                //change the url
+                linkTag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+
+
                 //connect pages to classes
                 if (PageClassesEnabled)
                 {
@@ -60,9 +66,7 @@ namespace OnlineBooks.Infastructure
                     linkTag.AddCssClass(i == PageModel.CurrentPage ? PageClassSelected : PageClassNormal);
                 }
                 
-                //change the url
-                linkTag.Attributes["href"] = urlHelper.Action(PageAction, new { page = i });
-                
+               
                 linkTag.InnerHtml.AppendHtml(i.ToString());
 
                 //add the a tags to the result var

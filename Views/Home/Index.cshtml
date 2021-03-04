@@ -5,44 +5,41 @@
 @model BookListViewModel
 <br />
 <br />
-<div class="container">
-    <h2>Here are the Top Picks</h2>
-</div>
-<br /><br />
-<div class="container">
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Total Pages</th>
-            <th>Publisher</th>
-            <th>ISBN</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Classification</th>
-        </tr>
-        @foreach(var x in Model.Books)
-        {
-    <tr>
-        <td>@x.Title</td>
-        <td>@x.AuthorFirstName @x.AuthorMiddleInitial @x.AuthorLastName</td>
-        <td>@x.PageNumber</td>
-        <td>@x.Publisher</td>
-        <td>@x.ISBN</td>
-        <td>$@x.Price</td>
-        <td>@x.Category</td>
-        <td>@x.Classification</td>
-    </tr>
-        }
 
-    </table>
-</div>
-<br />
-<br />
+<div class="row m-1 p-1">
+    
+    <div >
 
-<div class="container justify-content-center" 
-     page-classes-enabled="true"
-     page-class-normal="btn-outline-dark"
-     page-class-selected="btn-primary" 
-     page-class="btn" 
-     page-model="@Model.PagingInfo" page-action="Index"></div>
+        <h2>Here are the Top Picks</h2>
+        <br />
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Total Pages</th>
+                <th>Publisher</th>
+                <th>ISBN</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Classification</th>
+            </tr>
+            @foreach (var x in Model.Books) //you have to specificy what part of the model youare talking about
+            {
+                <partial name="ProjectSummary" model="x" />
+            }
+
+        </table>
+        <br />
+        <br />
+        <br />
+        <div page-classes-enabled="true"
+             page-class-normal="btn-outline-dark"
+             page-class-selected="btn-primary"
+             page-class="btn"
+             page-url-category="@Model.CurrentClassification"
+             page-model="@Model.PagingInfo" page-action="Index"></div>
+    </div>
+</div>
+
+
+

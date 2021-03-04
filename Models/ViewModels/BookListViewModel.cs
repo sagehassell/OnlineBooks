@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineBooks.Models.ViewModels
 {
+    //the view that will be handed to the project - has 2 sets of info
     public class BookListViewModel
     {
         //info about the project
@@ -12,5 +13,8 @@ namespace OnlineBooks.Models.ViewModels
 
         //info about the page number
         public PagingInfo PagingInfo { get; set; }
+
+        //what category is the book in
+        public string CurrentClassification { get; set; }
     }
 }
