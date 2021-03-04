@@ -16,6 +16,7 @@ namespace OnlineBooks.Migrations
                     AuthorFirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AuthorMiddleInitial = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AuthorLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PageNumber = table.Column<int>(type: "int", nullable: false),
                     Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
