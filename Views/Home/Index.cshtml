@@ -4,31 +4,19 @@
 
 @model BookListViewModel
 <br />
-<br />
 
 <div class="row m-1 p-1">
     
-    <div >
-
-        <h2>Here are the Top Picks</h2>
+    <div class="col-sm-9">
+        <h2>Avaliable Books </h2>
         <br />
-        <table>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Total Pages</th>
-                <th>Publisher</th>
-                <th>ISBN</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Classification</th>
-            </tr>
+       
             @foreach (var x in Model.Books) //you have to specificy what part of the model youare talking about
             {
                 <partial name="ProjectSummary" model="x" />
+                <br />
             }
 
-        </table>
         <br />
         <br />
         <br />

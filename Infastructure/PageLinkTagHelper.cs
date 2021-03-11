@@ -54,7 +54,7 @@ namespace OnlineBooks.Infastructure
                 //build a tag 
                 TagBuilder linkTag = new TagBuilder("a");
 
-                PageUrlValues["page"] = i;
+                PageUrlValues["pageNum"] = i;
                 //change the url
                 linkTag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
