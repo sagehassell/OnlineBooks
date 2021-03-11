@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace OnlineBooks
 {
@@ -33,11 +34,22 @@ namespace OnlineBooks
             services.AddDbContext<BooksDBContext>(options =>
            {
                //set the connection string to the one I just made
-               options.UseSqlServer(Configuration["ConnectionStrings:BooksConnection"]);
+               options.UseSqlite(Configuration["ConnectionStrings:BooksConnection"]);
            });
             
             //add scoped - so each person gets their own mini version of the DB
             services.AddScoped<IBooksRepository, EFBooksRepository>();
+
+            //razor page
+            services.AddRazorPages();
+
+            //set up sessions
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
+            //add cart
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +68,8 @@ namespace OnlineBooks
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -64,24 +78,27 @@ namespace OnlineBooks
             {
                 //build endpoint for classification - the structre for how people access things on our site
                 endpoints.MapControllerRoute("classpage",
-                    "{category}/{page:int}",
+                    "{category}/{pageNum:int}",
                     new { Controller = "home", action = "index" }
                     );
 
                 endpoints.MapControllerRoute("page",
-                    "P{page:int}",
+                    "P{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapControllerRoute("category",
                     "{category}",
-                    new { Controller = "Home", action = "Index", page=1 });
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
 
                 endpoints.MapControllerRoute(
                     "pagination",
-                    "P{page}",
+                    "P{pageNum}",
                     new { Controller = "Home", action = "Index" });
 
                 endpoints.MapDefaultControllerRoute();
+
+                //for razor pages
+                endpoints.MapRazorPages();
             });
 
             //This will call the EnsurePopulated method in Seed Data and tell us if it has already been migrated

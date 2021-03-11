@@ -1,12 +1,25 @@
 ﻿@model Book
 
-<tr>
-    <td>@Model.Title</td>
-    <td>@Model.AuthorFirstName @Model.AuthorMiddleInitial @Model.AuthorLastName</td>
-    <td>@Model.PageNumber</td>
-    <td>@Model.Publisher</td>
-    <td>@Model.ISBN</td>
-    <td>$@Model.Price</td>
-    <td>@Model.Category</td>
-    <td>@Model.Classification</td>
-</tr>
+
+<div class="card">
+    <h5 class="card-header">
+        @Model.Title
+        <form id="@Model.BookId" asp-page="/Buy" method="post">
+            <input type="hidden" asp-for="BookId" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit" class="btn btn-outline-success" style="float:right">Purchase</button>
+        </form>
+    </h5>
+    <div class="card-body">
+        <h6 class="card-title">Author: @Model.AuthorFirstName @Model.AuthorMiddleInitial @Model.AuthorLastName</h6>
+        <p class="card-text">Classification: @Model.Classification</p>
+        <p class="card-text">Price: @Model.Price</p>
+        <p class="card-text">Publisher: @Model.Publisher</p>
+        <p class="card-text">Category: @Model.Category</p>
+        <p class="card-text">ISBN: @Model.ISBN</p>
+        <p class="card-text">Total Pages: @Model.PageNumber</p>
+    </div>
+    
+    
+
+</div>

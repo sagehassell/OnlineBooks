@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<string>
-
+<br />
 <a class="btn btn-block btn-outline-secondary" 
    asp-action="Index" 
    asp-controller="Home"
@@ -11,7 +11,7 @@
        asp-action="Index"
        asp-controller="Home"
        asp-route-category="@category"
-       asp-route-page="1">
+       asp-route-pageNum="1">
         @category
     </a>
 }

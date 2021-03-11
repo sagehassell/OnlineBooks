@@ -27,7 +27,7 @@ namespace OnlineBooks.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(string category, int page = 1) //default go to page 1
+        public IActionResult Index(string category, int pageNum = 1) //default go to page 1
         {
             //pass in the Book objects
             return View(new BookListViewModel
@@ -36,12 +36,12 @@ namespace OnlineBooks.Controllers
                     //querey writen out in the language link
                     .Where(p => category == null || p.Classification == category)
                     .OrderBy(p => p.BookId)
-                    .Skip((page -1) * PageSize)
+                    .Skip((pageNum -1) * PageSize)
                     .Take(PageSize)
                     ,
                 PagingInfo = new PagingInfo
                     {
-                        CurrentPage = page,
+                        CurrentPage = pageNum,
                         ItemsPerPage = PageSize,
                         TotalNumItems = category == null ? _repository.Books.Count() :
                             _repository.Books.Where(x => x.Classification == category).Count()
